@@ -14,3 +14,5 @@ firebase.getTypes().then(types => {
 });
 
 events.activateEvents();
+
+domController.populateFooter();

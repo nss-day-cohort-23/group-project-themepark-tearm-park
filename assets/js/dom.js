@@ -10,4 +10,14 @@ const displayAreaGrid = areas => {
     $("#area-grid").html(areaGrid({areas}));
 };
 
-module.exports = {displayAreaGrid};
+const populateFooter = () => {
+    let today = new Date(Date.now());
+    let context = {
+        "year": today.getFullYear(),
+        "date": `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`
+    };
+    const footerTemplate = require("../templates/footer.hbs");
+    $("#footer").html(footerTemplate(context));
+};
+
+module.exports = {displayAreaGrid, populateFooter};
