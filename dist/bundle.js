@@ -10,7 +10,24 @@ const displayAreaGrid = areas => {
 };
 
 module.exports = {displayAreaGrid};
-},{"../templates/area-grid.hbs":4}],2:[function(require,module,exports){
+},{"../templates/area-grid.hbs":5}],2:[function(require,module,exports){
+"use strict";
+
+const firebase = require("./firebase");
+
+module.exports.activateEvents = function(){
+    console.log("events activate!");
+
+$("#area-grid").click(function(){
+    firebase.getAttractions($(event.target).attr("id"))
+    .then(attractions => {
+        console.log(attractions);
+    });
+});
+
+
+};
+},{"./firebase":3}],3:[function(require,module,exports){
 "use strict";
 
 const db_url = "https://theme-park-6b937.firebaseio.com";
@@ -25,16 +42,45 @@ const getAreas = () => {
     });
 };
 
-module.exports = {getAreas};
-},{}],3:[function(require,module,exports){
+// promises a full list of types
+const getTypes = () => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: `${db_url}/attraction_types.json`
+        }).done(results => resolve(results))
+        .fail(error => reject(error));
+    });
+};
+
+//accepts an area id and promises an array of attractions in that area
+const getAttractions = (areaID) => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: `${db_url}/attractions.json?orderBy="area_id"&equalTo=${areaID}`
+        }).done(results => resolve(results))
+        .fail(error => reject(error));
+    });
+};
+
+module.exports = {getAreas, getTypes, getAttractions};
+},{}],4:[function(require,module,exports){
 "use strict";
 
 const domController = require("./dom");
 const firebase = require("./firebase");
+const events = require("./events");
+
 firebase.getAreas().then(areas => {
     domController.displayAreaGrid(areas);
 });
-},{"./dom":1,"./firebase":2}],4:[function(require,module,exports){
+
+// copy this and paste it into the type formatter module
+firebase.getTypes().then(types => {
+    console.log(types);
+});
+
+events.activateEvents();
+},{"./dom":1,"./events":2,"./firebase":3}],5:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"1":function(container,depth0,helpers,partials,data) {
@@ -55,7 +101,7 @@ module.exports = HandlebarsCompiler.template({"1":function(container,depth0,help
     + "</div>";
 },"useData":true});
 
-},{"hbsfy/runtime":24}],5:[function(require,module,exports){
+},{"hbsfy/runtime":25}],6:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -123,7 +169,7 @@ exports['default'] = inst;
 module.exports = exports['default'];
 
 
-},{"./handlebars/base":6,"./handlebars/exception":9,"./handlebars/no-conflict":19,"./handlebars/runtime":20,"./handlebars/safe-string":21,"./handlebars/utils":22}],6:[function(require,module,exports){
+},{"./handlebars/base":7,"./handlebars/exception":10,"./handlebars/no-conflict":20,"./handlebars/runtime":21,"./handlebars/safe-string":22,"./handlebars/utils":23}],7:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -229,7 +275,7 @@ exports.createFrame = _utils.createFrame;
 exports.logger = _logger2['default'];
 
 
-},{"./decorators":7,"./exception":9,"./helpers":10,"./logger":18,"./utils":22}],7:[function(require,module,exports){
+},{"./decorators":8,"./exception":10,"./helpers":11,"./logger":19,"./utils":23}],8:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -247,7 +293,7 @@ function registerDefaultDecorators(instance) {
 }
 
 
-},{"./decorators/inline":8}],8:[function(require,module,exports){
+},{"./decorators/inline":9}],9:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -278,7 +324,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 
-},{"../utils":22}],9:[function(require,module,exports){
+},{"../utils":23}],10:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -334,7 +380,7 @@ exports['default'] = Exception;
 module.exports = exports['default'];
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -382,7 +428,7 @@ function registerDefaultHelpers(instance) {
 }
 
 
-},{"./helpers/block-helper-missing":11,"./helpers/each":12,"./helpers/helper-missing":13,"./helpers/if":14,"./helpers/log":15,"./helpers/lookup":16,"./helpers/with":17}],11:[function(require,module,exports){
+},{"./helpers/block-helper-missing":12,"./helpers/each":13,"./helpers/helper-missing":14,"./helpers/if":15,"./helpers/log":16,"./helpers/lookup":17,"./helpers/with":18}],12:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -423,7 +469,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 
-},{"../utils":22}],12:[function(require,module,exports){
+},{"../utils":23}],13:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -519,7 +565,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 
-},{"../exception":9,"../utils":22}],13:[function(require,module,exports){
+},{"../exception":10,"../utils":23}],14:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -546,7 +592,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 
-},{"../exception":9}],14:[function(require,module,exports){
+},{"../exception":10}],15:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -577,7 +623,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 
-},{"../utils":22}],15:[function(require,module,exports){
+},{"../utils":23}],16:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -605,7 +651,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -619,7 +665,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -654,7 +700,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 
-},{"../utils":22}],18:[function(require,module,exports){
+},{"../utils":23}],19:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -703,7 +749,7 @@ exports['default'] = logger;
 module.exports = exports['default'];
 
 
-},{"./utils":22}],19:[function(require,module,exports){
+},{"./utils":23}],20:[function(require,module,exports){
 (function (global){
 /* global window */
 'use strict';
@@ -727,7 +773,7 @@ module.exports = exports['default'];
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1036,7 +1082,7 @@ function executeDecorators(fn, prog, container, depths, data, blockParams) {
 }
 
 
-},{"./base":6,"./exception":9,"./utils":22}],21:[function(require,module,exports){
+},{"./base":7,"./exception":10,"./utils":23}],22:[function(require,module,exports){
 // Build out our basic SafeString type
 'use strict';
 
@@ -1053,7 +1099,7 @@ exports['default'] = SafeString;
 module.exports = exports['default'];
 
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1179,12 +1225,12 @@ function appendContextPath(contextPath, id) {
 }
 
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
 module.exports = require('./dist/cjs/handlebars.runtime')['default'];
 
-},{"./dist/cjs/handlebars.runtime":5}],24:[function(require,module,exports){
+},{"./dist/cjs/handlebars.runtime":6}],25:[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":23}]},{},[3]);
+},{"handlebars/runtime":24}]},{},[4]);
