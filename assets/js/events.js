@@ -4,14 +4,19 @@ const firebase = require("./firebase");
 const $ = require("jquery");
 const dom = require("./dom");
 
+const getAttractionData = require('./typeFormatter');
+
+
 module.exports.activateEvents = function(){
 
 $("#area-grid").click(function(){
     if ($(event.target).attr("id")!= ""){
         firebase.getAttractions($(event.target).attr("id"))
             .then(attractions => {
-                console.log("this is from the click event", attractions);
-                dom.displayAttractions(attractions);
+                return getAttractionData.getTypeNames(attractions);
+            }).then ( (data) => {
+                dom.displayAttractions(data);
+                console.log("after event", data);
             });
     }
     

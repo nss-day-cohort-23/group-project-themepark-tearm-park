@@ -21,4 +21,16 @@ const displayAttractions = attractions => {
     
 };
 
-module.exports = {displayAreaGrid, displayAttractions};
+
+const populateFooter = () => {
+    let today = new Date(Date.now());
+    let context = {
+        "year": today.getFullYear(),
+        "date": `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`
+    };
+    const footerTemplate = require("../templates/footer.hbs");
+    $("#footer").html(footerTemplate(context));
+};
+
+module.exports = {displayAreaGrid, populateFooter, displayAttractions};
+
