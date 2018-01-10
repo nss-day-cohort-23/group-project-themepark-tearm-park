@@ -7,22 +7,49 @@
     <title>Thearme Park</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="my-3">Thearme Park</h1>
-        <div class="row">
-            <div class="col-4">
-                <h3>Attraction info</h3>
+    <div id="wrapper">
+
+        <header>
+            <div class="navbar">
+                <div class="container row mx-auto">
+                    <div class="col-4">
+                        <a class="navbar-brand" href="/">
+                            <img src="/assets/img/logo.png" width="60" height="60" class="d-inline-block align-center mr-3" alt="">
+                            Thearme Park
+                        </a>
+                    </div>
+                    <div class="col-4 text-center d-flex">
+                        <i class="material-icons">search</i>
+                        <input type="text" class="form-control" placeholder="Search attractions" id="attraction-search">
+                    </div>
+                    <div class="col-4"></div>
+                </div>
             </div>
-            <div class="col-8">
-                <h3>Area grid</h3>
-                <div id="area-grid"></div>
+        </header>
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-4">
+                    <h3>Attraction info</h3>
+                    <div id="attraction-list"></div>
+                </div>
+                <div class="col-8">
+                    <h3>Area grid</h3>
+                    <div id="area-grid"></div>
+                </div>
             </div>
         </div>
+        <footer class="p-2">
+            <div class="container text-center text-muted" id="footer">
+                <p>2018 &copy; Thearme Park</p>
+                <p>Last updated January 10th, 2018</p>
+            </div>
+        </footer>
     </div>
-   
     <script src="dist/bundle.js"></script>
 </body>
 </html>
