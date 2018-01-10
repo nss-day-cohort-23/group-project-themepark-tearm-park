@@ -2,7 +2,6 @@
 
 const domController = require("./dom");
 const firebase = require("./firebase");
-const typeFormatter = require("./typeFormatter");
 const events = require("./events");
 
 firebase.getAreas().then(areas => {
