@@ -1,5 +1,6 @@
 "use strict";
 
+const $ = require("jquery");
 const db_url = "https://theme-park-6b937.firebaseio.com";
 
 // promises a list of areas

@@ -1,6 +1,7 @@
 "use strict";
 
 const firebase = require("./firebase");
+const $ = require("jquery");
 
 module.exports.activateEvents = function(){
     console.log("events activate!");
