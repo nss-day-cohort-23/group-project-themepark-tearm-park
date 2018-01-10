@@ -11,7 +11,14 @@ const displayAreaGrid = areas => {
 };
 
 const displayAttractions = attractions => {
-$("#attraction-list").
-}
+    let attractionArray = [];
+    const sidebar = require("../templates/sidebar.hbs");
+    for (let prop in attractions){
+        attractionArray.push(attractions[prop]);
+    }
+    $("#attraction-list").html(sidebar({attractions: attractionArray}));
+    
+    
+};
 
 module.exports = {displayAreaGrid, displayAttractions};

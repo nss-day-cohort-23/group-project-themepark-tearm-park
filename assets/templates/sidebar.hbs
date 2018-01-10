@@ -1,9 +1,10 @@
-{{#each attraction}}
-
+<div class = "attractions-container">
+    <p>{{this.name}}</p>
+{{#each attractions}}
 <div class="attraction-card">
-    <p class="attraction-name">{{attraction.name}}({{attraction.type}})</p>
-    <p class="attraction-description">{{attraction.description}}</p>
-    <p class="attraction-hours">{{attraction.times[0]}} to {{attraction.times[times.length]}}</p>
+    <p class="attraction-name">{{this.name}}</p>
+    <p class="attraction-description">{{this.description}}</p>
+    {{!-- <p class="attraction-hours">{{this.times[0]}} to {{this.times[times.length]}}</p> --}}
 </div>
-
 {{/each}}
+</div>
