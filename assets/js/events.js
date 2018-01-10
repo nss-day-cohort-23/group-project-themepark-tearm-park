@@ -7,10 +7,13 @@ module.exports.activateEvents = function(){
     console.log("events activate!");
 
 $("#area-grid").click(function(){
-    firebase.getAttractions($(event.target).attr("id"))
-    .then(attractions => {
-        console.log(attractions);
-    });
+    if ($(event.target).attr("id")!= ""){
+        firebase.getAttractions($(event.target).attr("id"))
+            .then(attractions => {
+                console.log(attractions);
+            });
+    }
+    
 });
 
 
