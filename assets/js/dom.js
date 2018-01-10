@@ -1,5 +1,7 @@
 "use strict";
 
+const $ = require("jquery");
+
 // prints all areas in grid with names and colors
 const displayAreaGrid = areas => {
     const areaGrid = require("../templates/area-grid.hbs");
