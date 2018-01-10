@@ -18,6 +18,24 @@ html, body {
 }
 .container {
     flex-basis: 100%;
+    #area-grid {
+        .row {
+            .area {
+                color: #fff;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+                cursor: pointer;
+                transition: .2s;
+                &:hover {
+                    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                }
+            }
+            > div {
+                &:hover {
+                    z-index: 3000;
+                }
+            }
+        }
+    }
 }
 footer {
     font-size: .9rem;
