@@ -25,3 +25,13 @@ footer {
         margin: .5rem 0;
     }
 }
+
+.attraction-card{
+    border: 0.05rem solid gray;
+    padding: .9rem;
+    margin: .5rem;
+    .attraction-name{
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+}

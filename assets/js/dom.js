@@ -10,4 +10,8 @@ const displayAreaGrid = areas => {
     $("#area-grid").html(areaGrid({areas}));
 };
 
-module.exports = {displayAreaGrid};
+const displayAttractions = attractions => {
+$("#attraction-list").
+}
+
+module.exports = {displayAreaGrid, displayAttractions};
