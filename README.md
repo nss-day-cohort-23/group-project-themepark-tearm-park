@@ -13,8 +13,8 @@ As a team you will create a interactive map of a theme park. The park will inclu
 > **Pro Tip:** If you find yourself writing logic on the first day of the sprint, then you did not spend enough time planning, and gaining clarification on the acceptance criteria.
 
 - [ ] Review the [product owner's tickets](https://github.com/nashville-software-school/group-project-theme-park/issues)
-- [ ] Create Firebase account for your team upload the boilerplate JSON data for use in this application.
-- [ ] Be sure to set your Firebase rules for indexing.
+- [x] Create Firebase account for your team upload the boilerplate JSON data for use in this application.
+- [x] Be sure to set your Firebase rules for indexing.
 
 ## Technical Considerations
 - [ ] Data is required to be requested from Firebase based on collections. Pull only what you need.
@@ -26,8 +26,8 @@ As a team you will create a interactive map of a theme park. The park will inclu
 - [x] SASS
 - [x] JQuery 
 - [x] Grunt (with JSHINT) 
-- [ ] Promises
-- [ ] Browserify
-- [ ] Handlebars
+- [x] Promises
+- [x] Browserify
+- [x] Handlebars
 - [ ] Grid framework of your choice
 - [x] Firebase for data storage and retrieval

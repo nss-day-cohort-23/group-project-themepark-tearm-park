@@ -1,5 +1,9 @@
 <div class="row">
     {{#each areas}}
-        <div style="background-color: #{{this.colorTheme}}" id="{{this.id}}" class="area col-4 py-5">{{this.name}}</div>
+        <div class="col-4 p-0">
+            {{#if this.id}}
+                <div style="background-color: #{{this.colorTheme}}" id="{{this.id}}" class="area py-5 text-center">{{this.name}}</div>
+            {{/if}}
+        </div>
     {{/each}}
 </div>
