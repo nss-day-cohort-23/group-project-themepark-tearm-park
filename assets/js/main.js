@@ -5,6 +5,7 @@ const firebase = require("./firebase");
 const events = require("./events");
 
 firebase.getAreas().then(areas => {
+    console.log(areas);
     domController.displayAreaGrid(areas);
 });
 
