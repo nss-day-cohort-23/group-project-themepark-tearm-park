@@ -10,6 +10,18 @@ const displayAreaGrid = areas => {
     $("#area-grid").html(areaGrid({areas}));
 };
 
+const displayAttractions = attractions => {
+    let attractionArray = [];
+    const sidebar = require("../templates/sidebar.hbs");
+    for (let prop in attractions){
+        attractionArray.push(attractions[prop]);
+    }
+    $("#attraction-list").html(sidebar({attractions: attractionArray}));
+    
+    
+};
+
+
 const populateFooter = () => {
     let today = new Date(Date.now());
     let context = {
@@ -20,4 +32,5 @@ const populateFooter = () => {
     $("#footer").html(footerTemplate(context));
 };
 
-module.exports = {displayAreaGrid, populateFooter};
+module.exports = {displayAreaGrid, populateFooter, displayAttractions};
+
