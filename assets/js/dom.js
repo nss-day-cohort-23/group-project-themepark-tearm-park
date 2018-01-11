@@ -34,9 +34,9 @@ const populateFooter = () => {
 
 // gives areas with areaIds a white dashed border
 const highlightAreas = areaIds => {
-    $(`.area`).removeClass("highlight");
+    $(`.block`).removeClass("highlight");
     areaIds.forEach(areaId => {
-        $(`#${areaId}.area`).addClass("highlight");
+        $(`#${areaId}.area`).parents(".block").addClass("highlight");
     });
 };
 
