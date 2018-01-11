@@ -23,7 +23,7 @@ const getTypes = () => {
     });
 };
 
-//accepts an area id and promises an array of attractions in that area
+// accepts an area id and promises an array of attractions in that area
 const getAttractions = areaID => {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -33,7 +33,7 @@ const getAttractions = areaID => {
     });
 };
 
-//accepts an area id and promises an array of attractions in that area
+// promises a list of all attractions
 const getAllAttractions = () => {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -43,6 +43,7 @@ const getAllAttractions = () => {
     });
 };
 
+// promises a list of all attractions that contain term in their names
 const searchAttractions = term => {
     return new Promise((resolve, reject) => {
         getAllAttractions().then(attractions => {
@@ -53,6 +54,7 @@ const searchAttractions = term => {
     });
 };
 
+// returns list of unique areas represented by list of attractions
 const getAreasFromAttractions = attractions => {
     let areas = [];
     attractions.forEach(attraction => {

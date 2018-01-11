@@ -5,12 +5,14 @@ const firebase = require("./firebase");
 const dom = require("./dom");
 const typeFormatter = require('./typeFormatter');
 
+// activate all events
 const activateEvents = function () {
     activateAreaGrid();
     activateAttractionCards();
     activateSearch();
 };
 
+// activates click listener on area grid squares
 const activateAreaGrid = () => {
     $("#area-grid").click(function () {
         if ($(event.target).attr("id") != "") {
@@ -24,6 +26,7 @@ const activateAreaGrid = () => {
     });
 };
 
+// activates click listener on attraction names
 const activateAttractionCards = () => {
     $(document).on("click", ".attraction-name", function () {
         $('.attraction-details').hide();
@@ -31,6 +34,7 @@ const activateAttractionCards = () => {
     });
 };
 
+// activates keyup listener on search box
 const activateSearch = () => {
     $("#attraction-search").on("keyup", event => {
         let term = $(event.target).val();

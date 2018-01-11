@@ -31,6 +31,7 @@ const populateFooter = () => {
     $("#footer").html(footerTemplate(context));
 };
 
+// gives areas with areaIds a white dashed border
 const highlightAreas = areaIds => {
     $(`.area`).removeClass("highlight");
     areaIds.forEach(areaId => {
