@@ -1,13 +1,19 @@
 <div class = "attractions-container">
     <p>{{this.name}}</p>
 {{#each attractions}}
-<div class="attraction-card">
-    <a class="attraction-name">{{this.name}}</a>
-    <p class = "attraction-type">({{this.typeName}})</p>
-    <div class = "attraction-details isHidden">
-        <p class="attraction-description">{{this.description}}</p>
-        {{!-- <p class="attraction-hours">{{this.times[0]}} to {{this.times[times.length]}}</p> --}}
+    <div class="attraction-card">
+        <a class="attraction-name" href="#">{{name}}</a>
+        <p class = "attraction-type text-muted my-1">{{typeName}}</p>
+        <div class = "attraction-details isHidden mt-3 mb-0">
+            {{#if times}}
+                <ul>
+                    {{#each times}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            <p class="attraction-description mb-0">{{description}}</p>
+        </div>
     </div>
-</div>
 {{/each}}
 </div>
