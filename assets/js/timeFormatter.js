@@ -10,7 +10,8 @@ module.exports.activateClock = function(){
   
 };
 
-
+// called in main.js, accepts all attractions and filters down to attractions with hours
+// passes attractions with hours into the getAreaNames function 
 module.exports.getAttractionsWithHours = (allAttractions) => {
     let attractionsWithHours = allAttractions.filter(function (attractionObject) {
         if (attractionObject.hasOwnProperty('times')){
