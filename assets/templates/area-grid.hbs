@@ -1,5 +1,5 @@
 {{#each areas}}
-    <div class="block">
+    <div class="block" {{#if this}}id="{{this.id}}"{{/if}}>
         {{#if this}}
             <div style="background-color: #{{this.colorTheme}}" id="{{this.id}}" class="area"></div>
             <div id="{{this.id}}" style="background-color: #{{this.colorTheme}}" class="name">{{this.name}}</div>

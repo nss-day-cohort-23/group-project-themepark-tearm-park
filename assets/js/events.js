@@ -15,8 +15,9 @@ const activateEvents = function () {
 // activates click listener on area grid squares
 const activateAreaGrid = () => {
     $("#area-grid").click(function () {
-        if ($(event.target).attr("id") != "") {
-            firebase.getAttractions($(event.target).attr("id"))
+        let $target = $(event.target);
+        if ($target.attr("id") != "" && $target.hasClass("area")) {
+            firebase.getAttractions($target.attr("id"))
                 .then(attractions => {
                     return typeFormatter.getTypeNames(attractions);
                 }).then((data) => {
