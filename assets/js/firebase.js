@@ -64,4 +64,4 @@ const getAreasFromAttractions = attractions => {
     return areas;
 };
 
-module.exports = {getAreas, getTypes, getAttractions, searchAttractions, getAreasFromAttractions};
+module.exports = {getAreas, getTypes, getAttractions, getAllAttractions, searchAttractions, getAreasFromAttractions};

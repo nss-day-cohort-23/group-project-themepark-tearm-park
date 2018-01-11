@@ -17,8 +17,21 @@ const displayAttractions = attractions => {
     for (let prop in attractions){
         attractionArray.push(attractions[prop]);
     }
+    
     $("#attraction-list").html(sidebar({attractions: attractionArray}));
 };
+
+const displayTimeAttractions = attractions => {
+    let attractionArray = [];
+    const sidebar = require("../templates/timeAttr.hbs");
+    for (let prop in attractions){
+        attractionArray.push(attractions[prop]);
+    }
+    
+    $("#attraction-list").html(sidebar({attractions: attractionArray}));
+    
+};
+
 
 // populates copyright footer with current year/date
 const populateFooter = () => {
@@ -31,6 +44,7 @@ const populateFooter = () => {
     $("#footer").html(footerTemplate(context));
 };
 
+
 // gives areas with areaIds a white dashed border
 const highlightAreas = areaIds => {
     $(`.block`).removeClass("highlight");
@@ -39,4 +53,4 @@ const highlightAreas = areaIds => {
     });
 };
 
-module.exports = {displayAreaGrid, populateFooter, displayAttractions, highlightAreas};
+module.exports = {displayAreaGrid, populateFooter, displayAttractions, highlightAreas, displayTimeAttractions};

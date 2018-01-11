@@ -85,3 +85,20 @@ footer {
 .isHidden{
     display: none;
 }
+
+.time-container{
+    width: 100%;
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    span{
+        color: gray;
+        font-size: 0.7em;
+    }
+    .time-selector{
+        width: 30%;
+        margin-left: 0.6em;
+    }
+
+}
