@@ -27,11 +27,6 @@ Promise.all(promiseArr)
     domController.displayAttractions(currentAttractions);
 });
 
-
-
-
-
-
 events.activateEvents();
 
 domController.populateFooter();

@@ -5,11 +5,12 @@ const $ = require("jquery");
 // prints all areas in grid with names and colors
 const displayAreaGrid = areas => {
     const areaGrid = require("../templates/area-grid.hbs");
-    areas.splice(1, 0, []);
-    areas.splice(7, 0, []);
-    $("#area-grid").html(areaGrid({areas}));
+    const order = [3, 4, -1, 2, 6, 5, 1, 0, -1];
+    let areaList = order.map(x => areas[x]);
+    $("#area-grid").html(areaGrid({"areas": areaList}));
 };
 
+// displays list of attractions in left sidebar
 const displayAttractions = attractions => {
     let attractionArray = [];
     const sidebar = require("../templates/sidebar.hbs");
@@ -18,8 +19,6 @@ const displayAttractions = attractions => {
     }
     
     $("#attraction-list").html(sidebar({attractions: attractionArray}));
-    
-    
 };
 
 const displayTimeAttractions = attractions => {
@@ -34,6 +33,7 @@ const displayTimeAttractions = attractions => {
 };
 
 
+// populates copyright footer with current year/date
 const populateFooter = () => {
     let today = new Date(Date.now());
     let context = {
@@ -44,5 +44,13 @@ const populateFooter = () => {
     $("#footer").html(footerTemplate(context));
 };
 
-module.exports = {displayAreaGrid, populateFooter, displayAttractions, displayTimeAttractions};
 
+// gives areas with areaIds a white dashed border
+const highlightAreas = areaIds => {
+    $(`.block`).removeClass("highlight");
+    areaIds.forEach(areaId => {
+        $(`#${areaId}.area`).parents(".block").addClass("highlight");
+    });
+};
+
+module.exports = {displayAreaGrid, populateFooter, displayAttractions, highlightAreas, displayTimeAttractions};
