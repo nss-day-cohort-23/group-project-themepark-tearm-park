@@ -5,9 +5,9 @@ const $ = require("jquery");
 // prints all areas in grid with names and colors
 const displayAreaGrid = areas => {
     const areaGrid = require("../templates/area-grid.hbs");
-    areas.splice(1, 0, []);
-    areas.splice(7, 0, []);
-    $("#area-grid").html(areaGrid({areas}));
+    const order = [3, 4, -1, 2, 6, 5, 1, 0, -1];
+    let areaList = order.map(x => areas[x]);
+    $("#area-grid").html(areaGrid({"areas": areaList}));
 };
 
 // displays list of attractions in left sidebar
@@ -33,9 +33,9 @@ const populateFooter = () => {
 
 // gives areas with areaIds a white dashed border
 const highlightAreas = areaIds => {
-    $(`.area`).removeClass("highlight");
+    $(`.block`).removeClass("highlight");
     areaIds.forEach(areaId => {
-        $(`#${areaId}.area`).addClass("highlight");
+        $(`#${areaId}.area`).parents(".block").addClass("highlight");
     });
 };
 
