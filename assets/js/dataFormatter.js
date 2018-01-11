@@ -20,20 +20,15 @@ module.exports.getTypeNames = (arrayOfAttractionObjects) => {
     });
 };
 
-
-// let getTypeName = (attractionObjects, typeObjects) => {
-    //     console.log("attractions", attractionObjects);
-    //     console.log("types", typeObjects);
-    //     for (let i=0; i<attractionObjects.length; i++) {
-    //         let currentTypeID = attractionObjects[i].type_id;
-    //         let currentAttraction = attractionObjects[i];
-    //         for (let i=0; i<typeObjects.length; i++) {
-    //             if (currentTypeID === typeObjects[i].id) {
-    //                 currentAttraction.typeName = typeObjects[i].name;
-    //             }
-    //         }
-    //     }
-    //     console.log("after loop", attractionObjects);
-    // };
-    
-    // getTypeName(attractions, types);
+module.exports.getAreaNames = (areas, attractions) => {
+    for (let i=0; i<attractions.length; i++){
+        let currentAttraction = attractions[i];
+        let currentAreaID = currentAttraction.area_id;
+            for (let c=0; c<areas.length; c++) {
+                if (currentAreaID === areas[c].id) {
+                    currentAttraction.areaName = areas[c].name;
+            }
+        }
+    }
+    return attractions;
+};

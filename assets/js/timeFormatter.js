@@ -2,6 +2,7 @@
 
 const $ = require('jquery');
 const printToDom = require('./dom');
+// const firebase = require('./firebase');
 
 let attractionsWithHours = [];
 
@@ -10,13 +11,13 @@ module.exports.activateClock = function(){
 };
 
 
-module.exports.getAttractionsWithHours = function(allAttractions){
+module.exports.getAttractionsWithHours = (allAttractions) => {
     attractionsWithHours = allAttractions.filter(function (attractionObject) {
         if (attractionObject.hasOwnProperty('times')){
             return attractionObject;
         }
     });
-    console.log("these attractions have hours", attractionsWithHours);
+    return attractionsWithHours;
 };
 
 module.exports.getCurrentAttractions = (time) => {
@@ -26,7 +27,7 @@ module.exports.getCurrentAttractions = (time) => {
         if (timesArray.indexOf(time) != -1){
             currentAttractions.push(attractionObject);
         }
-    console.log(currentAttractions, "attractions happening at this time");
+    // return currentAttractions;
     printToDom.displayAttractions(currentAttractions);
     });
 };

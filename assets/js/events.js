@@ -4,7 +4,7 @@ const firebase = require("./firebase");
 const $ = require("jquery");
 const dom = require("./dom");
 const moment = require('moment');
-const getAttractionData = require('./typeFormatter');
+const getAttractionData = require('./dataFormatter');
 const timeFormatter = require('./timeFormatter');
 
 

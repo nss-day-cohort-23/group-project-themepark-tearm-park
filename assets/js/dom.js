@@ -16,6 +16,7 @@ const displayAttractions = attractions => {
     for (let prop in attractions){
         attractionArray.push(attractions[prop]);
     }
+    
     $("#attraction-list").html(sidebar({attractions: attractionArray}));
     
     
