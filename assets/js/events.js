@@ -3,8 +3,9 @@
 const firebase = require("./firebase");
 const $ = require("jquery");
 const dom = require("./dom");
-
+const moment = require('moment');
 const getAttractionData = require('./typeFormatter');
+const timeFormatter = require('./timeFormatter');
 
 
 module.exports.activateEvents = function(){
@@ -27,6 +28,12 @@ $(document).on("click", ".attraction-name", function(){
     $(this).siblings('.attraction-details').show();
 });
 
+$('#time-selector').on("change", function () {
+    let currentTime = `2013-02-08 ${$('#time-selector').val()}`;
+        currentTime = moment(currentTime).format("h:mmA");
+        console.log("this should be a formatted current time when you change the selector", currentTime);
+        let currentAttractions = timeFormatter.getAttractionsByTime(currentTime);
+    });
 
 
 
