@@ -3,19 +3,20 @@
 const $ = require('jquery');
 const getTypeData = require('./firebase');
 
-module.exports.getTypeNames = (arrayOfAttractionObjects) => {
-    return new Promise ( (resolve, reject) => {
-        getTypeData.getTypes().then( (arrayOfTypeObjects) => {
-            for (let attraction in arrayOfAttractionObjects) {
-                let currentTypeID = arrayOfAttractionObjects[attraction].type_id;
-                let currentAttraction = arrayOfAttractionObjects[attraction];
-                for (let i=0; i<arrayOfTypeObjects.length; i++) {
-                    if (currentTypeID === arrayOfTypeObjects[i].id) {
-                        currentAttraction.typeName = arrayOfTypeObjects[i].name;
+module.exports.getTypeNames = attractions => {
+    return new Promise((resolve, reject) => {
+        getTypeData.getTypes().then(types => {
+            // TODO refactor with lodash
+            for (let index in attractions) {
+                let attraction = attractions[index];
+                let typeId = attraction.type_id;
+                for (let i=0; i<types.length; i++) {
+                    if (typeId === types[i].id) {
+                        attraction.typeName = types[i].name;
                     }
                 }
             }
-            resolve( (arrayOfAttractionObjects));
+            resolve((attractions));
         });
     });
 };
@@ -35,5 +36,5 @@ module.exports.getTypeNames = (arrayOfAttractionObjects) => {
     //     }
     //     console.log("after loop", attractionObjects);
     // };
-    
+
     // getTypeName(attractions, types);
