@@ -7,7 +7,6 @@ const displayAreaGrid = areas => {
     const areaGrid = require("../templates/area-grid.hbs");
     const order = [3, 4, -1, 2, 6, 5, 1, 0, -1];
     let areaList = order.map(x => areas[x]);
-    console.log(areaList);
     $("#area-grid").html(areaGrid({"areas": areaList}));
 };
 
