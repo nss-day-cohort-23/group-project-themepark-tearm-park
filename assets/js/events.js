@@ -22,5 +22,12 @@ $("#area-grid").click(function(){
     
 });
 
+$(document).on("click", ".attraction-name", function(){
+    $('.attraction-details').hide(); 
+    $(this).siblings('.attraction-details').show();
+});
+
+
+
 
 };

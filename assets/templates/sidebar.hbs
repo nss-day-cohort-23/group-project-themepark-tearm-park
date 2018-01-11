@@ -4,8 +4,10 @@
 <div class="attraction-card">
     <a class="attraction-name">{{this.name}}</a>
     <p class = "attraction-type">({{this.typeName}})</p>
-    <p class="attraction-description">{{this.description}}</p>
-    {{!-- <p class="attraction-hours">{{this.times[0]}} to {{this.times[times.length]}}</p> --}}
+    <div class = "attraction-details isHidden">
+        <p class="attraction-description">{{this.description}}</p>
+        {{!-- <p class="attraction-hours">{{this.times[0]}} to {{this.times[times.length]}}</p> --}}
+    </div>
 </div>
 {{/each}}
 </div>
