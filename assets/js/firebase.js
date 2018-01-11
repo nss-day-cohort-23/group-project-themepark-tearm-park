@@ -33,4 +33,14 @@ const getAttractions = (areaID) => {
     });
 };
 
-module.exports = {getAreas, getTypes, getAttractions};
+const getAllAttractions = () => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            // url: `${db_url}/attractions.json?orderBy="area_id"&equalTo=${areaID}`
+            url: `${db_url}/attractions.json`
+        }).done(results => resolve(results))
+        .fail(error => reject(error));
+    });
+};
+
+module.exports = {getAreas, getTypes, getAttractions, getAllAttractions};
