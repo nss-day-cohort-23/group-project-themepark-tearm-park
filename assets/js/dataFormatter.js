@@ -33,7 +33,6 @@ module.exports.getAreaNames = (attractions) => {
             }
         }
         resolve(attractions);
-        console.log("should have areaname", attractions);
         return attractions;
     });
     });

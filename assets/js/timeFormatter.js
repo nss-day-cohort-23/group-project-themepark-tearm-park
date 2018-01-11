@@ -18,15 +18,12 @@ module.exports.getAttractionsWithHours = (allAttractions) => {
         }
     });
     dataFormatter.getAreaNames(attractionsWithHours).then( (att) => {
-        console.log(att, "result of promise");
         attractionsWithAreas = att;
     });
-console.log(attractionsWithAreas, "in timeFOrmatter");
 };
 
 module.exports.getCurrentAttractions = (time) => {
     let currentAttractions = [];
-    console.log("matching with time", attractionsWithAreas);
     attractionsWithAreas.forEach(attractionObject => {
         let timesArray = attractionObject.times;
         if (timesArray.indexOf(time) != -1){
