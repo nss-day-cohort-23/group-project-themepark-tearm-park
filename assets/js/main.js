@@ -14,15 +14,16 @@ firebase.getAreas().then(areas => {
     domController.displayAreaGrid(areas);
 });
 
+let currentTime = moment().format("HH:mmA");
 // get attractions at current time
 firebase.getAllAttractions()
-        .then(attractions => {
-            let currentTime = moment().format("HH:mmA");
-            console.log(currentTime);
-            let currentAttractions = timeFormatter.getAttractionsByTime(currentTime, attractions);
-            console.log("these should be current attractions", currentAttractions);
-            // pass currentAttractions into dom module
-        });
+    .then(attractions => {
+        timeFormatter.getAttractionsWithHours(attractions);
+    })
+    .then( () => {
+        timeFormatter.getCurrentAttractions(currentTime);
+    });
+
 
 
 events.activateEvents();

@@ -31,8 +31,7 @@ $(document).on("click", ".attraction-name", function(){
 $('#time-selector').on("change", function () {
     let currentTime = `2013-02-08 ${$('#time-selector').val()}`;
         currentTime = moment(currentTime).format("h:mmA");
-        console.log("this should be a formatted current time when you change the selector", currentTime);
-        let currentAttractions = timeFormatter.getAttractionsByTime(currentTime);
+        let currentAttractions = timeFormatter.getCurrentAttractions(currentTime);
     });
 
 
