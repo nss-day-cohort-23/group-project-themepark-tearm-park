@@ -4,7 +4,6 @@ const domController = require("./dom");
 const firebase = require("./firebase");
 const events = require("./events");
 const timeFormatter = require("./timeFormatter");
-const dataFormatter = require("./dataFormatter");
 const $ = require('jquery');
 const moment = require('moment');
 
@@ -22,8 +21,7 @@ Promise.all(promiseArr)
         attractions = results[0];
     }
     domController.displayAreaGrid(areas);
-    let scheduledAttractions = timeFormatter.getAttractionsWithHours(attractions);
-    // scheduledAttractions = dataFormatter.getAreaNames(areas, scheduledAttractions);
+    timeFormatter.getAttractionsWithHours(attractions);
     let currentTime = moment().format("HH:mmA");
     let currentAttractions = timeFormatter.getCurrentAttractions(currentTime);
     domController.displayAttractions(currentAttractions);

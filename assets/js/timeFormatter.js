@@ -2,9 +2,9 @@
 
 const $ = require('jquery');
 const printToDom = require('./dom');
-// const firebase = require('./firebase');
+const dataFormatter = require('./dataFormatter');
 
-let attractionsWithHours = [];
+let attractionsWithAreas = [];
 
 module.exports.activateClock = function(){
   
@@ -12,17 +12,22 @@ module.exports.activateClock = function(){
 
 
 module.exports.getAttractionsWithHours = (allAttractions) => {
-    attractionsWithHours = allAttractions.filter(function (attractionObject) {
+    let attractionsWithHours = allAttractions.filter(function (attractionObject) {
         if (attractionObject.hasOwnProperty('times')){
             return attractionObject;
         }
     });
-    return attractionsWithHours;
+    dataFormatter.getAreaNames(attractionsWithHours).then( (att) => {
+        console.log(att, "result of promise");
+        attractionsWithAreas = att;
+    });
+console.log(attractionsWithAreas, "in timeFOrmatter");
 };
 
 module.exports.getCurrentAttractions = (time) => {
     let currentAttractions = [];
-    attractionsWithHours.forEach(attractionObject => {
+    console.log("matching with time", attractionsWithAreas);
+    attractionsWithAreas.forEach(attractionObject => {
         let timesArray = attractionObject.times;
         if (timesArray.indexOf(time) != -1){
             currentAttractions.push(attractionObject);
