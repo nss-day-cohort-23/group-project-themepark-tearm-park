@@ -21,6 +21,7 @@ const displayAttractions = attractions => {
     $("#attraction-list").html(sidebar({attractions: attractionArray}));
 };
 
+// accepts current attractions and passes them into appropriate handlebars template
 const displayTimeAttractions = attractions => {
     let attractionArray = [];
     const sidebar = require("../templates/timeAttr.hbs");
