@@ -4,6 +4,9 @@ const domController = require("./dom");
 const firebase = require("./firebase");
 const events = require("./events");
 const timeFormatter = require("./timeFormatter");
+const $ = require('jquery');
+var moment = require('moment');
+
 
 
 firebase.getAreas().then(areas => {
@@ -11,14 +14,15 @@ firebase.getAreas().then(areas => {
     domController.displayAreaGrid(areas);
 });
 
-// // copy this and paste it into the type formatter module
-// firebase.getTypes().then(types => {
-//     console.log(types);
-// });
 
 firebase.getAllAttractions().then(attractions => {
     console.log("these should be attraciton with times", attractions);
-    let currentTime = "4:00PM";
+    // $('#time-selector').on("change", function () {
+    //     console.log($('#time-selector').val());
+    //     // let currentTime = timeFormatter.formatTime($('#time-selector').val());
+    // });
+    let currentTime = moment().format("HH:mmA");
+    console.log("this should be a string of the current time", currentTime);
     let currentAttractions = timeFormatter.getAttractionsByTime(currentTime, attractions);
     // pass currentAttractions into dom module
 });
