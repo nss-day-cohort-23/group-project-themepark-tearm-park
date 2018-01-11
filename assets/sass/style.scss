@@ -19,26 +19,42 @@ html, body {
 .container {
     flex-basis: 100%;
     #area-grid {
-        .row {
-            .area {
-                color: #fff;
-                box-sizing: border-box;
-                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
-                cursor: pointer;
-                transition: .2s;
-                border: 3px dashed transparent;
-                &:hover {
-                    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-                }
-                &.highlight {
-                    border-color: rgba(255, 255, 255, .8);
+        background-image: url(../img/magic_kingdom.jpg);
+        background-position: center;
+        background-size: cover;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+        .block {
+            cursor: pointer;
+            &:hover {
+                .area {
+                    opacity: .6;
                 }
             }
-            > div {
-                &:hover {
-                    z-index: 3000;
-                }
+        }
+        .area {
+            box-sizing: border-box;
+            transition: .2s;
+            padding: 30% 0;
+            opacity: .3;
+            border: 3px dashed transparent;
+            &.highlight {
+                border-color: rgba(255, 255, 255, .7);
             }
+        }
+        .name {
+            position: absolute;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: -5rem;
+            margin-left: 1rem;
+            color: #fff;
+            border-radius: 3px;
+            padding: .1rem .5rem;
+            z-index: 2000;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            text-shadow: 1px 1px 1px rgba(#000, .8);
         }
     }
 }
