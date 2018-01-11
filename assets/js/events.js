@@ -16,7 +16,8 @@ const activateEvents = function () {
 const activateAreaGrid = () => {
     $("#area-grid").click(function () {
         let $target = $(event.target);
-        if ($target.attr("id") != "" && $target.hasClass("area")) {
+        console.log($target);
+        if ($target.attr("id") != "" && $target.hasClass("area") || $target.hasClass("name")) {
             firebase.getAttractions($target.attr("id"))
                 .then(attractions => {
                     return typeFormatter.getTypeNames(attractions);
