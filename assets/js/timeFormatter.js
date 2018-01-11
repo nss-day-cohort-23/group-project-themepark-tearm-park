@@ -33,7 +33,7 @@ module.exports.getCurrentAttractions = (time) => {
             currentAttractions.push(attractionObject);
         }
     // return currentAttractions;
-    printToDom.displayAttractions(currentAttractions);
+    printToDom.displayTimeAttractions(currentAttractions);
     });
 };
 

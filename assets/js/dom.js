@@ -22,6 +22,17 @@ const displayAttractions = attractions => {
     
 };
 
+const displayTimeAttractions = attractions => {
+    let attractionArray = [];
+    const sidebar = require("../templates/timeAttr.hbs");
+    for (let prop in attractions){
+        attractionArray.push(attractions[prop]);
+    }
+    
+    $("#attraction-list").html(sidebar({attractions: attractionArray}));
+    
+};
+
 
 const populateFooter = () => {
     let today = new Date(Date.now());
@@ -33,5 +44,5 @@ const populateFooter = () => {
     $("#footer").html(footerTemplate(context));
 };
 
-module.exports = {displayAreaGrid, populateFooter, displayAttractions};
+module.exports = {displayAreaGrid, populateFooter, displayAttractions, displayTimeAttractions};
 
