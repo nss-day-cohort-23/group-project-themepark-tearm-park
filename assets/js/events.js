@@ -23,24 +23,10 @@ $("#area-grid").click(function(){
 });
 
 $(document).on("click", ".attraction-name", function(){
-    $(".attraction-details").toggle();
+    $('.attraction-details').hide(); 
+    $(this).siblings('.attraction-details').show();
 });
 
-    // (document).on("click", ".deleteCat", function () {
-    //     let catId = $(this).attr("id");
-    //     console.log("catId", catId);
-    //     deleteCat(catId)
-    //         .then(() => {
-    //             alert("Category deleted");
-    //             return getCats();
-    //         })
-    //         .then(cats => {
-    //             listCats(cats);
-    //         })
-    //         .catch(err => {
-    //             console.log("oops", err);
-    //         });
-    // });
 
 
 
