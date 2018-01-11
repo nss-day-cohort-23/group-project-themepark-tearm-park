@@ -3,6 +3,7 @@
 const $ = require('jquery');
 const getData = require('./firebase');
 
+// sticks type names on attraction objects
 module.exports.getTypeNames = (arrayOfAttractionObjects) => {
     return new Promise ( (resolve, reject) => {
         getData.getTypes().then( (arrayOfTypeObjects) => {
