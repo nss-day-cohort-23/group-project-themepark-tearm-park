@@ -8,7 +8,7 @@ const $ = require('jquery');
 const moment = require('moment');
 
 // resolves getAreas promise and getAllAttractions promise
-let promiseArr = [firebase.getAreas(), firebase.getAllAttractions()];
+let promiseArr = [firebase.getAreas(), firebase.getAttractions()];
 Promise.all(promiseArr)
 .then( (results) => {
     let areas = [];

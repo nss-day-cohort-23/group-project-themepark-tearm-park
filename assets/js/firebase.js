@@ -23,18 +23,8 @@ const getTypes = () => {
     });
 };
 
-// accepts an area id and promises an array of attractions in that area
-const getAttractions = areaID => {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: `${db_url}/attractions.json?orderBy="area_id"&equalTo=${areaID}`
-        }).done(results => resolve(results))
-        .fail(error => reject(error));
-    });
-};
-
 // promises a list of all attractions
-const getAllAttractions = () => {
+const getAttractions = () => {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: `${db_url}/attractions.json`
@@ -43,25 +33,14 @@ const getAllAttractions = () => {
     });
 };
 
-// promises a list of all attractions that contain term in their names
-const searchAttractions = term => {
+// accepts an area id and promises an array of attractions in that area
+const getAttractionsByArea = areaID => {
     return new Promise((resolve, reject) => {
-        getAllAttractions().then(attractions => {
-            let regex = new RegExp(term, "i");
-            let matches = attractions.filter(attraction => regex.test(attraction.name));
-            resolve(matches);
-        });
+        $.ajax({
+            url: `${db_url}/attractions.json?orderBy="area_id"&equalTo=${areaID}`
+        }).done(results => resolve(results))
+        .fail(error => reject(error));
     });
 };
 
-// returns list of unique areas represented by list of attractions
-const getAreasFromAttractions = attractions => {
-    let areas = [];
-    attractions.forEach(attraction => {
-        if (areas.indexOf(attraction.area_id) == -1)
-        areas.push(attraction.area_id);
-    });
-    return areas;
-};
-
-module.exports = {getAreas, getTypes, getAttractions, getAllAttractions, searchAttractions, getAreasFromAttractions};
+module.exports = {getAreas, getTypes, getAttractions, getAttractionsByArea};

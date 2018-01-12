@@ -4,6 +4,7 @@ const $ = require("jquery");
 const firebase = require("./firebase");
 const dom = require("./dom");
 const moment = require('moment');
+const attractionFactory = require("./attractions");
 const dataFormatter = require('./dataFormatter');
 const timeFormatter = require('./timeFormatter');
 
@@ -31,9 +32,8 @@ const activateTimeSelector = () =>{
 const activateAreaGrid = () => {
     $("#area-grid").click(function () {
         let $target = $(event.target);
-        console.log($target);
         if ($target.attr("id") != "" && $target.hasClass("area") || $target.hasClass("name")) {
-            firebase.getAttractions($target.attr("id"))
+            firebase.getAttractionsByArea($target.attr("id"))
                 .then(attractions => {
                     return dataFormatter.getTypeNames(attractions);
                 }).then((data) => {
@@ -56,8 +56,8 @@ const activateSearch = () => {
     $("#attraction-search").on("keyup", event => {
         let term = $(event.target).val();
         if (term.trim() != "") {
-            firebase.searchAttractions(term).then(attractions => {
-                let areas = firebase.getAreasFromAttractions(attractions);
+            attractionFactory.searchAttractions(term).then(attractions => {
+                let areas = attractionFactory.getAreasFromAttractions(attractions);
                 dom.highlightAreas(areas);
             });
         } else {
