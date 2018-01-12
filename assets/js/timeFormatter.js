@@ -23,15 +23,23 @@ module.exports.getAttractionsWithHours = (allAttractions) => {
 
 // accepts a time, goes through attractions with areas attached, searches for attractions that match the time you passed in
 module.exports.getCurrentAttractions = (startTime) => {
-    let endTime = moment(startTime).add(1, 'hours').format("HH:mmA");
-    console.log("this should be an hour after the time you entered", endTime);
     let currentAttractions = [];
-    // moment('2010-10-20').isBetween('2010-10-19', '2010-10-25'); // true
+    let endTime = moment(startTime).add(1, 'hours'); // adds an hour to the time you pass in and formats it correctly
+    console.log("this should be the start time", startTime);
+    console.log("this should be the end time", endTime);
     attractionsWithAreas.forEach(attractionObject => {
         let timesArray = attractionObject.times;
-        if (timesArray.indexOf(startTime) != -1){
-            currentAttractions.push(attractionObject);
-        }
+        timesArray.forEach(time => {
+            console.log("this should be a moment object of the time in the time array", moment(time));
+            if (moment(time).isBetween(startTime, endTime), 'hour'){
+                console.log(attractionObject, "this starts soon!");
+                currentAttractions.push(attractionObject);
+            }
+        });
+        console.log("this should be the current attractions array", currentAttractions);
+        // if (timesArray.indexOf(startTime) != -1 ){
+        //     currentAttractions.push(attractionObject);
+        // }
         printToDom.displayTimeAttractions(currentAttractions);
     });
 };

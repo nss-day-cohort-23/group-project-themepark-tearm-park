@@ -21,7 +21,7 @@ const activateEvents = function () {
 const activateTimeSelector = () =>{
     $('#time-selector').on("change", function () {
         let currentTime = `2013-02-08 ${$('#time-selector').val()}`;
-        currentTime = moment(currentTime).format("h:mmA");
+        currentTime = moment(currentTime); // converts to a moment object but doesn't format
         let currentAttractions = timeFormatter.getCurrentAttractions(currentTime);
     });
 };
