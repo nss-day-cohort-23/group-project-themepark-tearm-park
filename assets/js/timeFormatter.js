@@ -3,6 +3,7 @@
 const $ = require('jquery');
 const printToDom = require('./dom');
 const dataFormatter = require('./dataFormatter');
+const moment = require('moment');
 
 let attractionsWithAreas = [];
 
@@ -21,11 +22,14 @@ module.exports.getAttractionsWithHours = (allAttractions) => {
 };
 
 // accepts a time, goes through attractions with areas attached, searches for attractions that match the time you passed in
-module.exports.getCurrentAttractions = (time) => {
+module.exports.getCurrentAttractions = (startTime) => {
+    let endTime = moment(startTime).add(1, 'hours').format("HH:mmA");
+    console.log("this should be an hour after the time you entered", endTime);
     let currentAttractions = [];
+    // moment('2010-10-20').isBetween('2010-10-19', '2010-10-25'); // true
     attractionsWithAreas.forEach(attractionObject => {
         let timesArray = attractionObject.times;
-        if (timesArray.indexOf(time) != -1){
+        if (timesArray.indexOf(startTime) != -1){
             currentAttractions.push(attractionObject);
         }
         printToDom.displayTimeAttractions(currentAttractions);
