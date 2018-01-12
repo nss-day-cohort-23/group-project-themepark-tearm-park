@@ -6,6 +6,7 @@ const events = require("./events");
 const timeFormatter = require("./timeFormatter");
 const $ = require('jquery');
 const moment = require('moment');
+const attractionFactory = require('./attractions');
 
 // resolves getAreas promise and getAllAttractions promise
 let promiseArr = [firebase.getAreas(), firebase.getAttractions()];
@@ -21,6 +22,7 @@ Promise.all(promiseArr)
         areas = results[1];
         attractions = results[0];
     }
+
     domController.displayAreaGrid(areas);  // displays area grid
     timeFormatter.getAttractionsWithHours(attractions); // accepts all attractions and returns attractions that have hours
     let currentTime = moment(); // this is a moment object that will get formatted in getCurrentAttractions
