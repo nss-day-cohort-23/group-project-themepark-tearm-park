@@ -25,6 +25,7 @@ const getAreasFromAttractions = attractions => {
 
 // promises a list of all attractions that contain term in their names
 const searchAttractions = term => {
+    const firebase = require("./firebase");
     return new Promise((resolve, reject) => {
         firebase.getAttractions().then(attractions => {
             let regex = new RegExp(term, "i");
@@ -37,6 +38,7 @@ const searchAttractions = term => {
 
 // sticks type names on attraction objects
 const addTypeNames = attractions => {
+    const firebase = require("./firebase");
     return new Promise ( (resolve, reject) => {
         firebase.getTypes().then( types => {
             // attractions is an object of objects!!!!
