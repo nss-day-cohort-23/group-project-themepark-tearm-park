@@ -30,7 +30,6 @@ const getAttractions = () => {
         $.ajax({
             url: `${db_url}/attractions.json`
         }).done(results => {
-            attractionFactory.setAttractions(results);
             resolve(results);
         })
         .fail(error => reject(error));

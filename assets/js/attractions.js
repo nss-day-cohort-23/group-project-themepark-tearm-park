@@ -7,11 +7,11 @@ const firebase = require("./firebase");
 // setter
 const setAttractions = attr => {
     attractions = attr;
-}
+};
 // getter
 const getAttractions = () => {
     return attractions;
-}
+};
 
 // returns list of unique areas represented by list of attractions
 const getAreasFromAttractions = attractions => {
@@ -25,6 +25,7 @@ const getAreasFromAttractions = attractions => {
 
 // promises a list of all attractions that contain term in their names
 const searchAttractions = term => {
+    // WHY did this work
     const firebase = require("./firebase");
     return new Promise((resolve, reject) => {
         firebase.getAttractions().then(attractions => {
@@ -35,9 +36,11 @@ const searchAttractions = term => {
     });
 };
 
+// -- FORMATTING -- //
 
 // sticks type names on attraction objects
 const addTypeNames = attractions => {
+    // WHY did this work
     const firebase = require("./firebase");
     return new Promise ( (resolve, reject) => {
         firebase.getTypes().then( types => {
@@ -72,4 +75,26 @@ const addAreaNames = attractions => {
     });
 };
 
-module.exports = {getAreasFromAttractions, searchAttractions, addAreaNames, addTypeNames, setAttractions};
+// promises list of attractions with typeName and areaName properties added
+const getFormattedAttractions = () => {
+    // WHY did this work
+    const firebase = require("./firebase");
+    return new Promise((resolve, reject) => {
+        // get basic attractions
+        firebase.getAttractions()
+        .then(attractions => {
+            return addAreaNames(attractions);
+        })
+        // gets attractions with areaNames
+        .then(partiallyFormattedAttractions => {
+            return addTypeNames(partiallyFormattedAttractions);
+        })
+        // gets attractions with typeNames
+        .then(formattedAttractions => {
+            setAttractions(formattedAttractions);
+            resolve(formattedAttractions);
+        });
+    });
+};
+
+module.exports = {getAreasFromAttractions, searchAttractions, addAreaNames, addTypeNames, setAttractions, getFormattedAttractions};
