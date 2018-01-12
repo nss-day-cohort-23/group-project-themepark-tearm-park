@@ -5,7 +5,6 @@ const firebase = require("./firebase");
 const dom = require("./dom");
 const moment = require('moment');
 const attractionFactory = require("./attractions");
-const dataFormatter = require('./dataFormatter');
 const timeFormatter = require('./timeFormatter');
 
 
@@ -35,7 +34,7 @@ const activateAreaGrid = () => {
         if ($target.attr("id") != "" && $target.hasClass("area") || $target.hasClass("name")) {
             firebase.getAttractionsByArea($target.attr("id"))
                 .then(attractions => {
-                    return dataFormatter.getTypeNames(attractions);
+                    return attractionFactory.addTypeNames(attractions);
                 }).then((data) => {
                     dom.displayAttractions(data);
                 });

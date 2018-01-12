@@ -18,7 +18,7 @@ const displayAttractions = attractions => {
         attractionArray.push(attractions[prop]);
     }
     
-    $("#attraction-list").html(sidebar({attractions: attractionArray}));
+    $("#attraction-list").html(sidebar({"attractions": attractionArray}));
 };
 
 // accepts current attractions and passes them into appropriate handlebars template

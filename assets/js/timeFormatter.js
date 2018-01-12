@@ -2,7 +2,6 @@
 
 const $ = require('jquery');
 const printToDom = require('./dom');
-const dataFormatter = require('./dataFormatter');
 const moment = require('moment');
 const attractionFactory = require("./attractions");
 
