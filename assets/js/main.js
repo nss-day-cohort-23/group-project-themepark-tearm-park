@@ -3,7 +3,7 @@
 const domController = require("./dom");
 const firebase = require("./firebase");
 const events = require("./events");
-const timeFormatter = require("./timeFormatter");
+const timeSearch = require("./timeSearch");
 const $ = require('jquery');
 const moment = require('moment');
 const attractionFactory = require('./attractions');
@@ -15,10 +15,10 @@ attractionFactory.getFormattedAttractions().then(attractions => {
     });
 
     // domController.displayAreaGrid(areas);  // displays area grid
-    timeFormatter.getAttractionsWithHours(attractions); // accepts all attractions and returns attractions that have hours
+    timeSearch.getAttractionsWithHours(attractions); // accepts all attractions and returns attractions that have hours
     let currentTime = moment(); // this is a moment object that will get formatted in getCurrentAttractions
     // let currentTime = moment().format("HH:mmA"); // gets current time with moment
-    timeFormatter.getCurrentAttractions(currentTime); //passes in current time and returns an array of attractions happening at that time
+    timeSearch.getCurrentAttractions(currentTime); //passes in current time and returns an array of attractions happening at that time
 });
 
 // resolves getAreas promise and getAllAttractions promise
@@ -37,10 +37,10 @@ attractionFactory.getFormattedAttractions().then(attractions => {
     // }
 
 //     // domController.displayAreaGrid(areas);  // displays area grid
-//     timeFormatter.getAttractionsWithHours(attractions); // accepts all attractions and returns attractions that have hours
+//     timeSearch.getAttractionsWithHours(attractions); // accepts all attractions and returns attractions that have hours
 //     let currentTime = moment(); // this is a moment object that will get formatted in getCurrentAttractions
 //     // let currentTime = moment().format("HH:mmA"); // gets current time with moment
-//     timeFormatter.getCurrentAttractions(currentTime); //passes in current time and returns an array of attractions happening at that time
+//     timeSearch.getCurrentAttractions(currentTime); //passes in current time and returns an array of attractions happening at that time
     
 // });
 

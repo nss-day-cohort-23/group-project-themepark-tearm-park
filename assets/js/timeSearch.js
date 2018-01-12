@@ -21,12 +21,22 @@ module.exports.getAttractionsWithHours = (allAttractions) => {
     });
 };
 
+const getScheduledAttractions = () => {
+    let attractions = attractionFactory.getAttractions();
+    let scheduledAttractions = attractions.filter(attraction => {
+        if (attraction.hasOwnProperty('times')){
+            return attraction;
+        }
+    });
+    return scheduledAttractions;
+};
+
 // accepts a start time from main.js and events.js (when the page loads or when you select at time)
 // this function DOESN'T WORK when the page loads because attractions with areas is an empty array at that point, so this is gonna need to be a callback for formatting all the attractions with area names
 module.exports.getCurrentAttractions = (startTime) => {
     let currentAttractions = []; 
     let endTime = moment(startTime).add(1, 'hours'); // adds one hour to start time (for example, if you enter 10:00 AM, the end time will be 11:00 AM)
-    attractionsWithAreas.forEach(attractionObject => {
+    getScheduledAttractions().forEach(attractionObject => {
         let timesArray = attractionObject.times;
         timesArray.forEach(time => {
             time = moment(time, 'h:mmA'); // loops through the times array in each attraction, convert time string to moment object

@@ -97,4 +97,4 @@ const getFormattedAttractions = () => {
     });
 };
 
-module.exports = {getAreasFromAttractions, searchAttractions, addAreaNames, addTypeNames, setAttractions, getFormattedAttractions};
+module.exports = {getAreasFromAttractions, searchAttractions, addAreaNames, addTypeNames, setAttractions, getAttractions, getFormattedAttractions};

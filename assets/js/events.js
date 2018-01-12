@@ -5,7 +5,7 @@ const firebase = require("./firebase");
 const dom = require("./dom");
 const moment = require('moment');
 const attractionFactory = require("./attractions");
-const timeFormatter = require('./timeFormatter');
+const timeSearch = require('./timeSearch');
 
 // activate all events
 const activateEvents = function () {
@@ -21,7 +21,7 @@ const activateTimeSelector = () =>{
         let selectedTime = $('#time-selector').val(); // grab the selected time 
         let todaysDate= moment().format('MM-DD-YYYY'); // get todays date 
         let dateAndTime = moment(`${todaysDate} ${selectedTime}`);  // make a moment object with today's date and the selected time 
-        let currentAttractions = timeFormatter.getCurrentAttractions(dateAndTime); // pass the moment object into the timeFormatter module to get attractions happening at that time
+        let currentAttractions = timeSearch.getCurrentAttractions(dateAndTime); // pass the moment object into the timeSearch module to get attractions happening at that time
     });
 };
     
