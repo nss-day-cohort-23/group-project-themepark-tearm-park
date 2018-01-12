@@ -21,19 +21,20 @@ module.exports.getAttractionsWithHours = (allAttractions) => {
     });
 };
 
-// accepts a time, goes through attractions with areas attached, searches for attractions that match the time you passed in
+// accepts a start time from main.js and events.js (when the page loads or when you select at time)
+// this function DOESN'T WORK when the page loads because attractions with areas is an empty array at that point, so this is gonna need to be a callback for formatting all the attractions with area names
 module.exports.getCurrentAttractions = (startTime) => {
-    let currentAttractions = [];
-    let endTime = moment(startTime).add(1, 'hours');
+    let currentAttractions = []; 
+    let endTime = moment(startTime).add(1, 'hours'); // adds one hour to start time (for example, if you enter 10:00 AM, the end time will be 11:00 AM)
     attractionsWithAreas.forEach(attractionObject => {
         let timesArray = attractionObject.times;
         timesArray.forEach(time => {
-            time = moment(time, 'h:mmA');
-            if (moment(time).isBetween(startTime, endTime)){
-                currentAttractions.push(attractionObject);
+            time = moment(time, 'h:mmA'); // loops through the times array in each attraction, convert time string to moment object
+            if (moment(time).isBetween(startTime, endTime)){ // checks to see if moment object is within an hour of your start time
+                currentAttractions.push(attractionObject); // if so, push it into the currentAttractions array
             }
         });
-        printToDom.displayTimeAttractions(currentAttractions);
+        printToDom.displayTimeAttractions(currentAttractions); // send the current attractions array to the printer
     });
 };
 

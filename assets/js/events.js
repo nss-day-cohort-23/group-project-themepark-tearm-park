@@ -20,10 +20,10 @@ const activateEvents = function () {
 // activates time selector and calls getCurrentAttraction function
 const activateTimeSelector = () =>{
     $('#time-selector').on("change", function () {
-        let selectedTime = $('#time-selector').val();
-        let todaysDate= moment().format('MM-DD-YYYY');
-        let dateAndTime = moment(`${todaysDate} ${selectedTime}`);
-        let currentAttractions = timeFormatter.getCurrentAttractions(dateAndTime);
+        let selectedTime = $('#time-selector').val(); // grab the selected time 
+        let todaysDate= moment().format('MM-DD-YYYY'); // get todays date 
+        let dateAndTime = moment(`${todaysDate} ${selectedTime}`);  // make a moment object with today's date and the selected time 
+        let currentAttractions = timeFormatter.getCurrentAttractions(dateAndTime); // pass the moment object into the timeFormatter module to get attractions happening at that time
     });
 };
     
