@@ -4,6 +4,7 @@ const $ = require('jquery');
 const printToDom = require('./dom');
 const dataFormatter = require('./dataFormatter');
 const moment = require('moment');
+const attractionFactory = require("./attractions");
 
 let attractionsWithAreas = [];
 
@@ -16,7 +17,7 @@ module.exports.getAttractionsWithHours = (allAttractions) => {
             return attractionObject;
         }
     });
-    dataFormatter.getAreaNames(attractionsWithHours).then( (att) => {
+    attractionFactory.addAreaNames(attractionsWithHours).then( (att) => {
         attractionsWithAreas = att; // this is an array of attractions with areaName properties attached
     });
 };
