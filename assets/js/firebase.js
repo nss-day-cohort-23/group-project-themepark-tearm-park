@@ -2,6 +2,7 @@
 
 const $ = require("jquery");
 const db_url = "https://theme-park-6b937.firebaseio.com";
+const attractionFactory = require("./attractions");
 
 // promises a list of areas
 const getAreas = () => {
@@ -28,7 +29,10 @@ const getAttractions = () => {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: `${db_url}/attractions.json`
-        }).done(results => resolve(results))
+        }).done(results => {
+            attractionFactory.setAttractions(results);
+            resolve(results);
+        })
         .fail(error => reject(error));
     });
 };

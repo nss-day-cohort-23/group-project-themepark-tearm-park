@@ -4,6 +4,15 @@ let attractions = [];
 
 const firebase = require("./firebase");
 
+// setter
+const setAttractions = attr => {
+    attractions = attr;
+}
+// getter
+const getAttractions = () => {
+    return attractions;
+}
+
 // returns list of unique areas represented by list of attractions
 const getAreasFromAttractions = attractions => {
     let areas = [];
@@ -45,6 +54,9 @@ const addTypeNames = attractions => {
 
 // sticks areas names on attraction objects
 const addAreaNames = attractions => {
+    // WHY did this work
+    const firebase = require("./firebase");
+
     return new Promise ( (resolve, reject) => {
         firebase.getAreas().then( areas => {
             attractions.map(attraction => {
@@ -58,4 +70,4 @@ const addAreaNames = attractions => {
     });
 };
 
-module.exports = {getAreasFromAttractions, searchAttractions, addAreaNames, addTypeNames};
+module.exports = {getAreasFromAttractions, searchAttractions, addAreaNames, addTypeNames, setAttractions};

@@ -7,14 +7,12 @@ const moment = require('moment');
 const attractionFactory = require("./attractions");
 const timeFormatter = require('./timeFormatter');
 
-
 // activate all events
 const activateEvents = function () {
     activateAreaGrid();
     activateAttractionCards();
     activateSearch();
     activateTimeSelector();
-    
 };
 
 // activates time selector and calls getCurrentAttraction function
