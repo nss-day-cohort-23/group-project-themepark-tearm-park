@@ -23,7 +23,8 @@ Promise.all(promiseArr)
     }
     domController.displayAreaGrid(areas);  // displays area grid
     timeFormatter.getAttractionsWithHours(attractions); // accepts all attractions and returns attractions that have hours
-    let currentTime = moment().format("HH:mmA"); // gets current time with moment
+    let currentTime = moment(); // this is a moment object that will get formatted in getCurrentAttractions
+    // let currentTime = moment().format("HH:mmA"); // gets current time with moment
     timeFormatter.getCurrentAttractions(currentTime); //passes in current time and returns an array of attractions happening at that time
     
 });
