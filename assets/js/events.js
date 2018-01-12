@@ -21,8 +21,7 @@ const activateEvents = function () {
 const activateTimeSelector = () =>{
     $('#time-selector').on("change", function () {
         let selectedTime = $('#time-selector').val();
-        let todaysDate= moment();
-        todaysDate = todaysDate.format('MM-DD-YYYY');
+        let todaysDate= moment().format('MM-DD-YYYY');
         let dateAndTime = moment(`${todaysDate} ${selectedTime}`);
         let currentAttractions = timeFormatter.getCurrentAttractions(dateAndTime);
     });

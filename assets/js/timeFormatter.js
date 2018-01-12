@@ -24,7 +24,7 @@ module.exports.getAttractionsWithHours = (allAttractions) => {
 // accepts a time, goes through attractions with areas attached, searches for attractions that match the time you passed in
 module.exports.getCurrentAttractions = (startTime) => {
     let currentAttractions = [];
-    let endTime = moment(startTime).add(1, 'hours'); // adds an hour to the time you pass in and formats it correctly
+    let endTime = moment(startTime).add(1, 'hours');
     attractionsWithAreas.forEach(attractionObject => {
         let timesArray = attractionObject.times;
         timesArray.forEach(time => {
@@ -33,7 +33,6 @@ module.exports.getCurrentAttractions = (startTime) => {
                 currentAttractions.push(attractionObject);
             }
         });
-        console.log(currentAttractions);
         printToDom.displayTimeAttractions(currentAttractions);
     });
 };
