@@ -1,26 +1,11 @@
 'use strict';
 
 const $ = require('jquery');
-const printToDom = require('./dom');
+const dom = require('./dom');
 const moment = require('moment');
 const attractionFactory = require("./attractions");
 
-let attractionsWithAreas = [];
-
-// called in main.js, accepts all attractions and filters down to attractions with hours
-// passes attractions with hours into the getAreaNames function
-// goes to get areaNames, stores attractions with areaNames in this module 
-module.exports.getAttractionsWithHours = (allAttractions) => {
-    let attractionsWithHours = allAttractions.filter(function (attractionObject) {
-        if (attractionObject.hasOwnProperty('times')){
-            return attractionObject;
-        }
-    });
-    attractionFactory.addAreaNames(attractionsWithHours).then( (att) => {
-        attractionsWithAreas = att; // this is an array of attractions with areaName properties attached
-    });
-};
-
+// returns list of attractions with set times
 const getScheduledAttractions = () => {
     let attractions = attractionFactory.getAttractions();
     let scheduledAttractions = attractions.filter(attraction => {
@@ -32,19 +17,30 @@ const getScheduledAttractions = () => {
 };
 
 // accepts a start time from main.js and events.js (when the page loads or when you select at time)
-// this function DOESN'T WORK when the page loads because attractions with areas is an empty array at that point, so this is gonna need to be a callback for formatting all the attractions with area names
-module.exports.getCurrentAttractions = (startTime) => {
+const getCurrentAttractions = (startTime) => {
     let currentAttractions = []; 
-    let endTime = moment(startTime).add(1, 'hours'); // adds one hour to start time (for example, if you enter 10:00 AM, the end time will be 11:00 AM)
-    getScheduledAttractions().forEach(attractionObject => {
-        let timesArray = attractionObject.times;
+    // adds one hour to start time
+        // (for example, if you enter 10:00 AM, the end time will be 11:00 AM)
+    let endTime = moment(startTime).add(1, 'hours'); 
+    getScheduledAttractions().forEach(attraction => {
+        let timesArray = attraction.times;
+        // loops through the times array in each attraction
         timesArray.forEach(time => {
-            time = moment(time, 'h:mmA'); // loops through the times array in each attraction, convert time string to moment object
-            if (moment(time).isBetween(startTime, endTime)){ // checks to see if moment object is within an hour of your start time
-                currentAttractions.push(attractionObject); // if so, push it into the currentAttractions array
+            // convert time string to moment object
+            time = moment(time, 'h:mmA');
+            // checks to see if moment object is within an hour of your start time
+            if (moment(time).isBetween(startTime, endTime)) { 
+                currentAttractions.push(attraction);
             }
         });
-        printToDom.displayTimeAttractions(currentAttractions); // send the current attractions array to the printer
     });
+    return currentAttractions;
 };
 
+// gets and prints current attractions
+const printCurrentAttractions = (startTime) => {
+    let currentAttractions = getCurrentAttractions(startTime);
+    dom.displayTimeAttractions(currentAttractions);
+};
+
+module.exports = {printCurrentAttractions};
