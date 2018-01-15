@@ -4,9 +4,8 @@ const $ = require("jquery");
 const firebase = require("./firebase");
 const dom = require("./dom");
 const moment = require('moment');
-const dataFormatter = require('./dataFormatter');
-const timeFormatter = require('./timeFormatter');
-
+const attractionFactory = require("./attractions");
+const timeSearch = require('./timeSearch');
 
 // activate all events
 const activateEvents = function () {
@@ -14,7 +13,6 @@ const activateEvents = function () {
     activateAttractionCards();
     activateSearch();
     activateTimeSelector();
-    
 };
 
 // activates time selector and calls getCurrentAttraction function
@@ -23,7 +21,7 @@ const activateTimeSelector = () =>{
         let selectedTime = $('#time-selector').val(); // grab the selected time 
         let todaysDate= moment().format('MM-DD-YYYY'); // get todays date 
         let dateAndTime = moment(`${todaysDate} ${selectedTime}`);  // make a moment object with today's date and the selected time 
-        let currentAttractions = timeFormatter.getCurrentAttractions(dateAndTime); // pass the moment object into the timeFormatter module to get attractions happening at that time
+        timeSearch.printCurrentAttractions(dateAndTime);
     });
 };
     
@@ -31,11 +29,10 @@ const activateTimeSelector = () =>{
 const activateAreaGrid = () => {
     $("#area-grid").click(function () {
         let $target = $(event.target);
-        console.log($target);
         if ($target.attr("id") != "" && $target.hasClass("area") || $target.hasClass("name")) {
-            firebase.getAttractions($target.attr("id"))
+            firebase.getAttractionsByArea($target.attr("id"))
                 .then(attractions => {
-                    return dataFormatter.getTypeNames(attractions);
+                    return attractionFactory.addTypeNames(attractions);
                 }).then((data) => {
                     dom.displayAttractions(data);
                 });
@@ -56,8 +53,8 @@ const activateSearch = () => {
     $("#attraction-search").on("keyup", event => {
         let term = $(event.target).val();
         if (term.trim() != "") {
-            firebase.searchAttractions(term).then(attractions => {
-                let areas = firebase.getAreasFromAttractions(attractions);
+            attractionFactory.searchAttractions(term).then(attractions => {
+                let areas = attractionFactory.getAreasFromAttractions(attractions);
                 dom.highlightAreas(areas);
             });
         } else {
