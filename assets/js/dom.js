@@ -1,6 +1,7 @@
 "use strict";
 
 const $ = require("jquery");
+const _ = require("lodash");
 
 // prints all areas in grid with names and colors
 const displayAreaGrid = areas => {
@@ -14,25 +15,11 @@ const displayAreaGrid = areas => {
 const displayAttractions = attractions => {
     let attractionArray = [];
     const sidebar = require("../templates/sidebar.hbs");
-    for (let prop in attractions){
-        attractionArray.push(attractions[prop]);
-    }
-    
+    _.forEach(attractions, (attraction) => {
+        attractionArray.push(attraction);
+    });
     $("#attraction-list").html(sidebar({"attractions": attractionArray}));
 };
-
-// accepts current attractions and passes them into appropriate handlebars template
-const displayTimeAttractions = attractions => {
-    let attractionArray = [];
-    const sidebar = require("../templates/sidebar.hbs");
-    for (let prop in attractions){
-        attractionArray.push(attractions[prop]);
-    }
-    
-    $("#attraction-list").html(sidebar({attractions: attractionArray}));
-    
-};
-
 
 // populates copyright footer with current year/date
 const populateFooter = () => {
@@ -54,4 +41,4 @@ const highlightAreas = areaIds => {
     });
 };
 
-module.exports = {displayAreaGrid, populateFooter, displayAttractions, highlightAreas, displayTimeAttractions};
+module.exports = {displayAreaGrid, populateFooter, displayAttractions, highlightAreas};
