@@ -13,6 +13,7 @@ const activateEvents = function () {
     activateAttractionCards();
     activateSearch();
     activateTimeSelector();
+    activateCheckbox();
 };
 
 // activates time selector and calls getCurrentAttraction function
@@ -59,6 +60,17 @@ const activateSearch = () => {
             });
         } else {
             dom.highlightAreas([]);
+        }
+    });
+};
+
+const activateCheckbox = () => {
+    $("#searchByType").parent().on("click", event => {
+        let $input = $(event.target).find("input");
+        if ($input.attr("checked")) {
+            $input.removeAttr("checked");
+        } else {
+            $input.attr("checked", true);
         }
     });
 };
