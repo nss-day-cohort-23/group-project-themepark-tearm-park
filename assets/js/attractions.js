@@ -51,7 +51,7 @@ const addTypeNames = attractions => {
                 let attractionType = types.find(type => {
                     return type.id == attraction.type_id;
                 });
-                attraction.typeName = attractionType.name;
+                attraction.typeName = _.capitalize(attractionType.name);
             });
             resolve(attractions);
         });
