@@ -53,13 +53,26 @@ const activateAttractionCards = () => {
 const activateSearch = () => {
     $("#attraction-search").on("keyup", event => {
         let term = $(event.target).val();
-        if (term.trim() != "") {
-            attractionFactory.searchAttractions(term).then(attractions => {
-                let areas = attractionFactory.getAreasFromAttractions(attractions);
-                dom.highlightAreas(areas);
-            });
-        } else {
-            dom.highlightAreas([]);
+        // search by type
+        if ($("#searchByType").attr("checked")) {
+            if (term.trim() != "") {
+                attractionFactory.searchTypes(term).then(type => {
+                    return firebase.getAttractionsByType(type.id);
+                }).then(attractions => {
+                    dom.displayAttractions(attractions);
+                });
+            }
+        }
+        // search by name
+        else {
+            if (term.trim() != "") {
+                attractionFactory.searchAttractions(term).then(attractions => {
+                    let areas = attractionFactory.getAreasFromAttractions(attractions);
+                    dom.highlightAreas(areas);
+                });
+            } else {
+                dom.highlightAreas([]);
+            }
         }
     });
 };
