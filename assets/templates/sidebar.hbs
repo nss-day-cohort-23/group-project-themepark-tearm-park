@@ -3,7 +3,11 @@
 {{#each attractions}}
     <div class="attraction-card">
         <a class="attraction-name" href="#">{{name}}</a>
-        <p class = "attraction-type text-muted my-1">{{typeName}}</p>
+        {{#if areaName}}
+        <p class="attraction-type">({{areaName}})</p>
+            {{else}}
+            <p class = "attraction-type text-muted my-1">{{typeName}}</p>
+        {{/if}}
         <div class = "attraction-details isHidden mt-3 mb-0">
             {{#if times}}
                 <ul>
