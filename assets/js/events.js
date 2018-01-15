@@ -67,11 +67,13 @@ const activateSearch = () => {
         else {
             if (term.trim() != "") {
                 attractionFactory.searchAttractions(term).then(attractions => {
+                    dom.displayAttractions(attractions);
                     let areas = attractionFactory.getAreasFromAttractions(attractions);
                     dom.highlightAreas(areas);
                 });
             } else {
                 dom.highlightAreas([]);
+                
             }
         }
     });
