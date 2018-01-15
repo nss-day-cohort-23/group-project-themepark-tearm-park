@@ -4,15 +4,12 @@ const $ = require('jquery');
 const dom = require('./dom');
 const moment = require('moment');
 const attractionFactory = require("./attractions");
+const _ = require("lodash");
 
 // returns list of attractions with set times
 const getScheduledAttractions = () => {
     let attractions = attractionFactory.getAttractions();
-    let scheduledAttractions = attractions.filter(attraction => {
-        if (attraction.hasOwnProperty('times')){
-            return attraction;
-        }
-    });
+    let scheduledAttractions = attractions.filter(attraction => _.has(attraction, "times"));
     return scheduledAttractions;
 };
 
@@ -40,7 +37,7 @@ const getCurrentAttractions = (startTime) => {
 // gets and prints current attractions
 const printCurrentAttractions = (startTime) => {
     let currentAttractions = getCurrentAttractions(startTime);
-    dom.displayTimeAttractions(currentAttractions);
+    dom.displayAttractions(currentAttractions);
 };
 
 module.exports = {printCurrentAttractions};

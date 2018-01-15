@@ -3,6 +3,7 @@
 let attractions = [];
 
 const firebase = require("./firebase");
+const _ = require("lodash");
 
 // setter
 const setAttractions = attr => {
@@ -17,8 +18,9 @@ const getAttractions = () => {
 const getAreasFromAttractions = attractions => {
     let areas = [];
     attractions.forEach(attraction => {
-        if (areas.indexOf(attraction.area_id) == -1)
-        areas.push(attraction.area_id);
+        if (areas.indexOf(attraction.area_id) == -1) {
+            areas.push(attraction.area_id);
+        }
     });
     return areas;
 };
@@ -45,13 +47,12 @@ const addTypeNames = attractions => {
     return new Promise ( (resolve, reject) => {
         firebase.getTypes().then( types => {
             // attractions is an object of objects!!!!
-            for (let index in attractions) {
-                let attraction = attractions[index];
+            _.forEach(attractions, attraction => {
                 let attractionType = types.find(type => {
                     return type.id == attraction.type_id;
                 });
                 attraction.typeName = attractionType.name;
-            }
+            });
             resolve(attractions);
         });
     });
