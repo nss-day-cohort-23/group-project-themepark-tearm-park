@@ -44,8 +44,7 @@ const activateAreaGrid = () => {
 // activates click listener on attraction names
 const activateAttractionCards = () => {
     $(document).on("click", ".attraction-name", function () {
-        $('.attraction-details').hide();
-        $(this).siblings('.attraction-details').show();
+        $(this).siblings('.attraction-details').toggle();
     });
 };
 
