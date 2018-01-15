@@ -13,6 +13,7 @@ const activateEvents = function () {
     activateAttractionCards();
     activateSearch();
     activateTimeSelector();
+    activateCheckbox();
 };
 
 // activates time selector and calls getCurrentAttraction function
@@ -52,13 +53,37 @@ const activateAttractionCards = () => {
 const activateSearch = () => {
     $("#attraction-search").on("keyup", event => {
         let term = $(event.target).val();
-        if (term.trim() != "") {
-            attractionFactory.searchAttractions(term).then(attractions => {
-                let areas = attractionFactory.getAreasFromAttractions(attractions);
-                dom.highlightAreas(areas);
-            });
+        // search by type
+        if ($("#searchByType").attr("checked")) {
+            if (term.trim() != "") {
+                attractionFactory.searchTypes(term).then(type => {
+                    return firebase.getAttractionsByType(type.id);
+                }).then(attractions => {
+                    dom.displayAttractions(attractions);
+                });
+            }
+        }
+        // search by name
+        else {
+            if (term.trim() != "") {
+                attractionFactory.searchAttractions(term).then(attractions => {
+                    let areas = attractionFactory.getAreasFromAttractions(attractions);
+                    dom.highlightAreas(areas);
+                });
+            } else {
+                dom.highlightAreas([]);
+            }
+        }
+    });
+};
+
+const activateCheckbox = () => {
+    $("#searchByType").parent().on("click", event => {
+        let $input = $(event.target).find("input");
+        if ($input.attr("checked")) {
+            $input.removeAttr("checked");
         } else {
-            dom.highlightAreas([]);
+            $input.attr("checked", true);
         }
     });
 };

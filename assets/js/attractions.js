@@ -38,6 +38,19 @@ const searchAttractions = term => {
     });
 };
 
+// promises one type whose name matches the term
+const searchTypes = term => {
+    // WHY did this work
+    const firebase = require("./firebase");
+    return new Promise((resolve, reject) => {
+        firebase.getTypes().then(types => {
+            let regex = new RegExp(term, "i");
+            let match = types.find(type => regex.test(type.name));
+            resolve(match);
+        });
+    });
+};
+
 // -- FORMATTING -- //
 
 // sticks type names on attraction objects
@@ -98,4 +111,4 @@ const getFormattedAttractions = () => {
     });
 };
 
-module.exports = {getAreasFromAttractions, searchAttractions, addAreaNames, addTypeNames, setAttractions, getAttractions, getFormattedAttractions};
+module.exports = {getAreasFromAttractions, searchAttractions, searchTypes, addAreaNames, addTypeNames, setAttractions, getAttractions, getFormattedAttractions};
