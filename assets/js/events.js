@@ -44,8 +44,7 @@ const activateAreaGrid = () => {
 // activates click listener on attraction names
 const activateAttractionCards = () => {
     $(document).on("click", ".attraction-name", function () {
-        $('.attraction-details').hide();
-        $(this).siblings('.attraction-details').show();
+        $(this).siblings('.attraction-details').toggle();
     });
 };
 
@@ -67,11 +66,15 @@ const activateSearch = () => {
         else {
             if (term.trim() != "") {
                 attractionFactory.searchAttractions(term).then(attractions => {
+                    dom.displayAttractions(attractions);
                     let areas = attractionFactory.getAreasFromAttractions(attractions);
                     dom.highlightAreas(areas);
                 });
             } else {
                 dom.highlightAreas([]);
+                let currentTime = moment();
+                timeSearch.printCurrentAttractions(currentTime);
+                
             }
         }
     });

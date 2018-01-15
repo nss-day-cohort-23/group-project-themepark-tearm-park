@@ -19,6 +19,7 @@ const displayAttractions = attractions => {
         attractionArray.push(attraction);
     });
     $("#attraction-list").html(sidebar({"attractions": attractionArray}));
+    $('.attraction-details').hide();
 };
 
 // populates copyright footer with current year/date
