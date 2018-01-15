@@ -24,7 +24,7 @@ const displayAttractions = attractions => {
 // accepts current attractions and passes them into appropriate handlebars template
 const displayTimeAttractions = attractions => {
     let attractionArray = [];
-    const sidebar = require("../templates/timeAttr.hbs");
+    const sidebar = require("../templates/sidebar.hbs");
     for (let prop in attractions){
         attractionArray.push(attractions[prop]);
     }
