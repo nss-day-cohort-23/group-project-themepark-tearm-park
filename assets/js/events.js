@@ -72,6 +72,8 @@ const activateSearch = () => {
                 });
             } else {
                 dom.highlightAreas([]);
+                let currentTime = moment();
+                timeSearch.printCurrentAttractions(currentTime);
                 
             }
         }
